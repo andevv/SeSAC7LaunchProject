@@ -52,10 +52,19 @@ class ViewController: UIViewController {
         //        }
         
         //GCD DispatchGroup처럼 여러 비동기 메서드를 동시에 실행
-        //Swift Concurrency async let
+        //Swift Concurrency async let(통신 개수가 유한한 경우) / taskGroup
         Task {
             
             let result = try await ImageNetworkManager.shared.fetchAsyncLet()
+            
+            oneImageView.image = result[0]
+            twoImageView.image = result[1]
+            threeImageView.image = result[2]
+        }
+        
+        Task {
+            
+            let result = try await ImageNetworkManager.shared.fetchTaskGroup()
             
             oneImageView.image = result[0]
             twoImageView.image = result[1]

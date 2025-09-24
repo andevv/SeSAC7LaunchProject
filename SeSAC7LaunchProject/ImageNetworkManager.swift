@@ -99,4 +99,23 @@ class ImageNetworkManager {
         
         return result
     }
+    
+    //async let 대신, 횟수가 정해지지 않은 통신을 동시에 수행하려면
+    func fetchTaskGroup() async throws -> [UIImage] {
+        return try await withThrowingTaskGroup(of: UIImage.self) { group in
+            for i in 1...10 {
+                group.addTask {
+                    try await ImageNetworkManager.shared.fetchAsyncAwait()
+                }
+            }
+            
+            var resultImage: [UIImage] = []
+            
+            for try await i in group {
+                resultImage.append(i)
+            }
+            
+            return resultImage
+        }
+    }
 }
