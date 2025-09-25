@@ -13,6 +13,7 @@ import RealmSwift
 class AddViewController: UIViewController {
     
     var folder: MoneyFolder?
+    let repository = AccountRepository()
      
     let moneyField = UITextField()
     let categoryField = UITextField()
@@ -22,9 +23,7 @@ class AddViewController: UIViewController {
     
     let titleTextField = UITextField()
     let contentTextField = UITextField()
-         
-    let realm = try! Realm()
-    
+             
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
@@ -61,27 +60,7 @@ class AddViewController: UIViewController {
             print("필수값입니다.")
         } else {
             
-            //레코드 만들고
-            let data = Account(type: .random(),
-                               money: Int.random(in: 100...5000) * 100,
-                               title: titleTextField.text!)
-            
-            //가계부 내용을 폴더와 연결 짓기
-            let folder = realm.objects(MoneyFolder.self).where {
-                $0.id == self.folder!.id
-            }.first!
-              
-            if let image = photoImageView.image {
-                saveImageToDocument(image: image, filename: "\(data.id)")
-            }
- 
-            do {
-                try realm.write {
-                    folder.detail.append(data)
-                }
-            } catch {
-                print("데이터 저장 실패")
-            }
+            repository.creatAccount(title: titleTextField.text!, folder: folder!.id)
             
             navigationController?.popViewController(animated: true)
         }
