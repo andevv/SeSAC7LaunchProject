@@ -94,24 +94,60 @@ final class SimpleViewController: UIViewController {
 //    }
     
     //3. 그룹 중첩
+//    private static func layout() -> UICollectionViewLayout {
+//        
+//        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/4)))
+//        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+//        
+//        let innerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        
+//        let innerGroup = NSCollectionLayoutGroup.vertical(layoutSize: innerGroupSize, subitems: [item])
+//        
+//        let outerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(400))
+//        
+//        let outerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: outerGroupSize, subitems: [innerGroup])
+//        
+//        let section = NSCollectionLayoutSection(group: outerGroup)
+//        section.orthogonalScrollingBehavior = .groupPagingCentered
+//        //section.interGroupSpacing = 50
+//        
+//        let layout = UICollectionViewCompositionalLayout(section: section)
+//        
+//        return layout
+//    }
+    
+    //4. 여러 섹션
     private static func layout() -> UICollectionViewLayout {
-        
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/4)))
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        
-        let innerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        
-        let innerGroup = NSCollectionLayoutGroup.vertical(layoutSize: innerGroupSize, subitems: [item])
-        
-        let outerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(400))
-        
-        let outerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: outerGroupSize, subitems: [innerGroup])
-        
-        let section = NSCollectionLayoutSection(group: outerGroup)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        //section.interGroupSpacing = 50
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout { index, _ in
+            
+            if index == 0 {
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/4)))
+                item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                
+                let innerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                
+                let innerGroup = NSCollectionLayoutGroup.vertical(layoutSize: innerGroupSize, subitems: [item])
+                
+                let outerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(400))
+                
+                let outerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: outerGroupSize, subitems: [innerGroup])
+                
+                let section = NSCollectionLayoutSection(group: outerGroup)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+                
+                return section
+            } else {
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1.0)))
+                item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+                
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                return section
+            }
+        }
         
         return layout
     }
@@ -143,6 +179,11 @@ final class SimpleViewController: UIViewController {
 }
 
 extension SimpleViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -160,7 +201,7 @@ extension SimpleViewController: UICollectionViewDataSource {
 //            with: movie.imageURL,
 //            placeholder: UIImage(systemName: "film")
 //        )
-        cell.titleLabel.text = movie.title
+        cell.titleLabel.text = "\(indexPath)"
         cell.ratingLabel.text = String(format: "⭐️ %.1f", movie.rating)
         cell.backgroundColor = UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1)
         
