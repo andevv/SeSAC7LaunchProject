@@ -56,17 +56,60 @@ final class SimpleViewController: UIViewController {
      Layout: 전체 컬렉션뷰의 최종 레이아웃
      */
     
+    //1. 수직
+//    private static func layout() -> UICollectionViewLayout {
+//        
+//        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1.0)))
+//        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+//        
+//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+//        
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+//        
+//        let section = NSCollectionLayoutSection(group: group)
+//        //section.interGroupSpacing = 50
+//        
+//        let layout = UICollectionViewCompositionalLayout(section: section)
+//        
+//        return layout
+//    }
+    
+    //2. 수평
+//    private static func layout() -> UICollectionViewLayout {
+//        
+//        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1.0)))
+//        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+//        
+//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(100))
+//        
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+//        
+//        let section = NSCollectionLayoutSection(group: group)
+//        section.orthogonalScrollingBehavior = .groupPagingCentered
+//        //section.interGroupSpacing = 50
+//        
+//        let layout = UICollectionViewCompositionalLayout(section: section)
+//        
+//        return layout
+//    }
+    
+    //3. 그룹 중첩
     private static func layout() -> UICollectionViewLayout {
         
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .absolute(100), heightDimension: .absolute(50)))
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/4)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.8))
+        let innerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let innerGroup = NSCollectionLayoutGroup.vertical(layoutSize: innerGroupSize, subitems: [item])
         
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 50
+        let outerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(400))
+        
+        let outerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: outerGroupSize, subitems: [innerGroup])
+        
+        let section = NSCollectionLayoutSection(group: outerGroup)
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        //section.interGroupSpacing = 50
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         
@@ -113,12 +156,13 @@ extension SimpleViewController: UICollectionViewDataSource {
         let movie = movies[indexPath.item]
         
         // Kingfisher를 사용해 이미지뷰에 이미지 세팅
-        cell.posterImageView.kf.setImage(
-            with: movie.imageURL,
-            placeholder: UIImage(systemName: "film")
-        )
+//        cell.posterImageView.kf.setImage(
+//            with: movie.imageURL,
+//            placeholder: UIImage(systemName: "film")
+//        )
         cell.titleLabel.text = movie.title
         cell.ratingLabel.text = String(format: "⭐️ %.1f", movie.rating)
+        cell.backgroundColor = UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1)
         
         return cell
     }

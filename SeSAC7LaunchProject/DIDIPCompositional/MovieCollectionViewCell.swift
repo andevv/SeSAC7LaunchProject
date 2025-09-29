@@ -11,7 +11,7 @@ import SnapKit
 class MovieCollectionViewCell: UICollectionViewCell {
     static let id = "MovieCollectionViewCell"
     
-    let posterImageView = UIImageView()
+    //let posterImageView = UIImageView()
     let titleLabel = UILabel()
     let ratingLabel = UILabel()
     
@@ -27,19 +27,20 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureHierarchy() {
-        contentView.addSubview(posterImageView)
+        //contentView.addSubview(posterImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(ratingLabel)
     }
     
     private func configureLayout() {
-        posterImageView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(contentView.snp.width).multipliedBy(1.3)
-        }
+//        posterImageView.snp.makeConstraints { make in
+//            make.top.horizontalEdges.equalToSuperview()
+//            make.height.equalTo(contentView.snp.width).multipliedBy(1.3)
+//        }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(posterImageView.snp.bottom).offset(6)
-            make.horizontalEdges.equalToSuperview().inset(4)
+            make.center.equalToSuperview()
+//            make.top.equalTo(posterImageView.snp.bottom).offset(6)
+//            make.horizontalEdges.equalToSuperview().inset(4)
         }
         ratingLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(2)
@@ -48,8 +49,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureView() {
-        posterImageView.contentMode = .scaleAspectFill
-        posterImageView.clipsToBounds = true
+//        posterImageView.contentMode = .scaleAspectFill
+//        posterImageView.clipsToBounds = true
         titleLabel.font = .boldSystemFont(ofSize: 15)
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .left
@@ -59,7 +60,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(image: UIImage?, title: String, rating: Double) {
-        posterImageView.image = image
+        //posterImageView.image = image
         titleLabel.text = title
         ratingLabel.text = String(format: "⭐️ %.1f", rating)
     }
