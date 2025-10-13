@@ -14,7 +14,22 @@
 		FE3D2E862E84C42C00014E88 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE3D2E852E84C42C00014E88 /* RealmSwift */; };
 		FE3D2E972E84C60F00014E88 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FE3D2E962E84C60F00014E88 /* .gitignore */; };
 		FEA4503B2E8A0F03007F27D4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FEA4503A2E8A0F03007F27D4 /* Kingfisher */; };
+		FED66FEB2E9CA1C600F9B117 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = FE3D2E852E84C42C00014E88 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FED66FEC2E9CA1C600F9B117 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FED66FEB2E9CA1C600F9B117 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FE19C9AE2E83770000B7F7E0 /* SeSAC7LaunchProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC7LaunchProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +102,7 @@
 				FE19C9AB2E8376FF00B7F7E0 /* Frameworks */,
 				FE19C9AC2E8376FF00B7F7E0 /* Resources */,
 				FE2E41DF2E8E1B3C0091B436 /* ShellScript */,
+				FED66FEC2E9CA1C600F9B117 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,6 +216,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSAC7LaunchProject/SeSAC7LaunchProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -239,6 +256,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSAC7LaunchProject/SeSAC7LaunchProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L3KYP426WW;
