@@ -47,6 +47,9 @@ final class SimpleViewController: UIViewController {
         navigationItem.title = "영화 3열 그리드"
 
         configureCollectionView()
+        
+//        let a = ["ads", nil]
+//        navigationItem.title = a[100]!
     }
     
     /*

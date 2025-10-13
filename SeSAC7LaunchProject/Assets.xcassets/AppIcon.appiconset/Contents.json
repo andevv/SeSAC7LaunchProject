@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "무제 3.001 4.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -12,6 +13,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "무제 3.001 2.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -23,6 +25,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "무제 3.001 3.jpeg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
